@@ -1,2 +1,1 @@
-cd C:\marketEmulator
-python server.py >> serverLog.txt 2>>&1
+C:\Users\Administrator\Anaconda3\envs\untitled\python.exe server.py >> serverLog.txt 2>>&1
