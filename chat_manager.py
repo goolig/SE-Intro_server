@@ -3,6 +3,8 @@ import threading
 
 semaphore = threading.Semaphore()
 
+messages = []
+
 userPublicKeys = {}#pickle.load(open("keys_public.pkl",'r'))
 users = userPublicKeys.keys()
 
@@ -36,3 +38,7 @@ def generateRequestId():
 	global requestId
 	requestId = requestId + 1
 	return requestId
+
+
+def add_message(user_name, message_text):
+	messages.append((user_name,message_text))

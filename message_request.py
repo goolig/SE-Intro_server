@@ -1,5 +1,6 @@
 import traceback
 
+import chat_manager
 
 
 class message_request:
@@ -13,7 +14,7 @@ class message_request:
         }
         return d
 
-    def recieve_message(self, json):
+    def recieve_message(self,json):
         return "here are your messages: bla bla bla"
         # try:
         #     if not json.has_key("commodity"):
@@ -28,7 +29,16 @@ class message_request:
         #     print(traceback.print_exc())
         #     return str(e)
 
-    def send_message(self, json):
+    def send_message(self,json):
+        print("adding message")
+        try:
+            message_text = json["message_text"]  # .encode("utf8")
+        except Exception as e:
+            print(traceback.print_exc())
+            return str(e)
+
+
+        chat_manager.add_message(self.user_name,message_text)
         return "thanks for your message. here is the message ID: blabla"
         # try:
         #     if not json.has_key("id"):
@@ -88,7 +98,7 @@ class message_request:
 
 
 
-            resp = self.requestTypes[self.message_type](self, json)
+            resp = self.requestTypes[self.message_type](self,json)
             # if nonce is not None:
             #     cipher = ""  # pkcs.new(public_key_object)
             #     resp = "".join(map(lambda i: cipher.encrypt(resp[i:i + 64]), range(0, len(resp), 64)))

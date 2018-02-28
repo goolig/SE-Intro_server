@@ -53,6 +53,11 @@ class S(SimpleHTTPRequestHandler):
 		
 		self.wfile.write(b"<html><body>")
 		self.wfile.write(b"<h1> Welcome to SE intro 2018 </h1>")#%str("<br>".join(realLeading)))
+		print(chat_manager.messages)
+		for t in chat_manager.messages:
+			print(t)
+			self.wfile.write(bytearray("<h3>%s</h3>" % str(t),encoding='utf8'))  # %str("<br>".join(realLeading)))
+
 		# self.wfile.write("<h1> Leaders </h1> <h3>%s</h3>"%str("<br>".join(leading)))
 		# self.wfile.write("<h1> History </h1> <h3>%s</h3>"%str("<br>".join(history)))
 		# self.wfile.write("<h1> Holdings </h1> %s"%str("<br>".join(map(lambda k,v:k + " - " + str(v),holdings))))
@@ -68,7 +73,7 @@ class S(SimpleHTTPRequestHandler):
 		try:
 			self._set_headers()
 			self.data_string = self.rfile.read(int(self.headers['Content-Length']))
-			data = json.loads(self.data_string)
+			data = json.loads(self.data_string.decode('utf-8'))
 		except Exception as e: 
 			print(traceback.print_exc())
 			resp = str(e)
