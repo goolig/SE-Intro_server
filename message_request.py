@@ -10,6 +10,10 @@ class message_request:
 
     def send_message(self,request_json):
         try:
+            username = request_json["userName"]
+            group_id = request_json["groupID"]
+            self.user_name = username
+            self.group_id = group_id
             message_content = request_json['messageContent']
             message_date = request_json["msgDate"]
             message_guid = chat_manager.add_message(self.user_name, message_content, message_date, self.group_id)
@@ -22,14 +26,12 @@ class message_request:
 
     def loadFromJson(self, request_json):
         try:
-            username = request_json["userName"]
-            group_id = request_json["groupID"]
+
             message_type = request_json["messageType"]
             if message_type not in self.requestTypes:
                 return "Bad request type"
-            self.user_name = username
             self.message_type= message_type
-            self.group_id = group_id
+
             resp = self.requestTypes[self.message_type](self, request_json)
             return resp
         except Exception as e:

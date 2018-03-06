@@ -53,6 +53,7 @@ class S(SimpleHTTPRequestHandler):
 		except Exception as e: 
 			print(traceback.print_exc())
 
+
 def run(server_class=HTTPServer, handler_class=S, port=80):
 	global httpd
 	server_address = ('', port)

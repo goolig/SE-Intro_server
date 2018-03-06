@@ -18,8 +18,8 @@ class message():
 
 	def to_dict(self):
 		try:
-			return {"userName": self.user_name, "messageGuid": self.guid, "groupID": self.group_id, "msgDate": self.message_date,
-			 "messageContent": self.message_content, "serverTime": self.server_time}
+			return {"userName": self.user_name, "messageGuid": self.guid, "groupID": self.group_id, "msgDate": self.server_time,
+			 "messageContent": self.message_content}
 		except Exception as e:
 			print(traceback.print_exc())
 			return str(e)
