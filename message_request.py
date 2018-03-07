@@ -16,8 +16,9 @@ class message_request:
             self.group_id = group_id
             message_content = request_json['messageContent']
             message_date = request_json["msgDate"]
-            message_guid = chat_manager.add_message(self.user_name, message_content, message_date, self.group_id)
-            return json.dumps({"messageGuid":message_guid})
+            m = chat_manager.add_message(self.user_name, message_content, message_date, self.group_id)
+            #return json.dumps({"messageGuid":message_guid})
+            return json.dumps(m.to_dict())
         except Exception as e:
             print(traceback.print_exc())
             return str(e)
