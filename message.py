@@ -1,3 +1,4 @@
+import datetime
 import json
 import time
 import traceback
@@ -14,7 +15,8 @@ class message():
 		self.server_time = int(time.time() * 1000)
 
 	def __str__ (self):
-		return f"{self.user_name}, {self.message_content}, {self.message_date}, {self.group_id}, {self.guid},{self.server_time}"
+		t = datetime.datetime.fromtimestamp(self.server_time/1000).strftime('%Y-%m-%d %H:%M:%S')
+		return f"Group: {self.group_id}, Nickname: {self.user_name} ({t}): {self.message_content} (Message GUID: {self.guid})"
 
 	def to_dict(self):
 		try:

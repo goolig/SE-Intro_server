@@ -18,11 +18,14 @@ class S(SimpleHTTPRequestHandler):
 
 	def do_GET(self):
 		self._set_headers()
-		self.wfile.write(b"<html><body>")
-		self.wfile.write(b"<h1> Welcome to SE intro 2018 </h1>")
+		self.wfile.write(bytes('<html> <head> <title>SE Intro Chat Room</title> <meta http-equiv=”refresh” content=”5" /> </head>     <body> </body> </html>', 'utf-8'))
+		self.wfile.write(b'<html> <body bgcolor="#E6E6FA">')
+		self.wfile.write(b"<h1> Welcome to SE Intro Chat Room 2018 </h1>")
+		self.wfile.write(b"<h2> Messages: </h2>")
+
 		for t in chat_manager.messages:
 			print(t)
-			self.wfile.write(bytearray("<h3>%s</h3>" % str(t),encoding='utf8'))  # %str("<br>".join(realLeading)))
+			self.wfile.write(bytearray("%s<br />" % str(t),encoding='utf8'))  # %str("<br>".join(realLeading)))
 		self.wfile.write(b"</body></html>")
 
 	def do_HEAD(self):
